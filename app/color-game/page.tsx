@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 
 export default function ColorGame() {
+//color game!!
   const [favoriteColor, setFavoriteColor] = useState('#ff0000');
   const [shades, setShades] = useState<string[]>([]);
   const [targetShade, setTargetShade] = useState('');
