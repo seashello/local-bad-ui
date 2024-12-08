@@ -7,11 +7,22 @@ export default function NiceEntry() {
   const [name, setName] = useState('');
   const router = useRouter();
 
+  const isValidName = (input: string) => {
+    return /^[a-zA-Z]+$/.test(input);
+  };
+
   const handleContinue = () => {
     if (name.trim()) {
-      console.log('Name entered:', name);
-      router.push('/name'); // or whatever route you want to go to
+      const encodedName = encodeURIComponent(name.trim());
+      router.push(`/name?is=${encodedName}`);
     }
+  };
+
+  // Add validation to the input change handler
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  // Only allow alphabetical characters
+  const value = e.target.value.replace(/[^a-zA-Z]/g, '');
+  setName(value);
   };
 
   return (
@@ -23,16 +34,21 @@ export default function NiceEntry() {
         <input
           type="text"
           value={name}
-          onChange={(e) => setName(e.target.value)}
+          onChange={handleInputChange}
           className="w-64 px-4 py-2 text-xl text-center border-b-2 border-gray-300 focus:border-blue-500 outline-none transition-colors bg-transparent"
           placeholder="Type your name"
+          maxLength={20}
           autoFocus
         />
+        {name && !isValidName(name) && (
+          <p className="text-red-500 text-sm mt-1">Please use only letters A-Z</p>
+        )}
       </div>
       
       {/* Clickable animated down arrow */}
       <button 
         onClick={handleContinue}
+        disabled={!name || !isValidName(name)}
         className="animate-bounce p-2 hover:text-blue-500 transition-colors"
         aria-label="Continue"
       >

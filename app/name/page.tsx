@@ -1,11 +1,31 @@
 "use client"
 
 import { useState, useEffect } from 'react';
+import { useSearchParams, useRouter } from 'next/navigation';
+
+const LETTERS = ["A", "B", "C", "D", "E", "F",
+                "G", "H", "I", "J", "K", "L",
+                "M", "N", "O", "P", "Q", "R",
+                "S", "T", "U", "V", "W", "X",
+                "Y", "Z"];
+
+const shuffleArray = (array: string[]) => {
+  const newArray = [...array];
+  for (let i = newArray.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+  }
+  return newArray;
+};
 
 const Home = () => {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const targetName = searchParams.get('is') || '';
   const [light, setLight] = useState<"red" | "green">("red");
   const [username, setUsername] = useState<string>("");
   const [shake, setShake] = useState<boolean>(false);
+  const [letters, setLetters] = useState(LETTERS);
 
   // Set random interval for time
   const getRandomInterval = (min: number, max: number) => {
@@ -20,7 +40,7 @@ const Home = () => {
       setTimeout(toggleLight, nextInterval);
     }
     const initialInterval = getRandomInterval(1, 5);
-    const timeoutId = setTimeout(toggleLight,  initialInterval);
+    const timeoutId = setTimeout(toggleLight, initialInterval);
     return () => clearInterval(timeoutId);
   }, []);
 
@@ -50,6 +70,15 @@ const Home = () => {
     return () => document.removeEventListener("mousemove", handleMouseMove);
   }, [light]);
 
+<<<<<<< HEAD
+=======
+  const handleConfirm = () => {
+    if (username.toLowerCase() === decodeURIComponent(targetName).toLowerCase()) {
+      router.push('/birthday'); // or whatever the next page is
+    }
+  };
+
+>>>>>>> bad-ui/master
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center">
       {/* Stoplight */}
@@ -68,6 +97,7 @@ const Home = () => {
         readOnly
       />
 
+<<<<<<< HEAD
       {/* Moving Letters */}
       <div className="mt-8 flex gap-2">
         {["A", "B", "C", "D", "E",
@@ -80,6 +110,27 @@ const Home = () => {
           <div
             key={index}
             className={`letter ${light === "red" ? "stopped" : ""}`}
+=======
+      {/* Confirm Button */}
+      <button
+        onClick={handleConfirm}
+        disabled={username.toLowerCase() !== decodeURIComponent(targetName).toLowerCase()}
+        className={`mt-4 px-6 py-2 rounded-lg transition-all ${
+          username.toLowerCase() === decodeURIComponent(targetName).toLowerCase()
+            ? 'bg-green-500 hover:bg-green-600 text-white cursor-pointer'
+            : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+        }`}
+      >
+        Confirm
+      </button>
+
+      {/* Moving Letters */}
+      <div className="mt-8 grid grid-cols-6 gap-4 max-w-xl">
+        {letters.map((char, index) => (
+          <div
+            key={index}
+            className={`letter ${light === "red" ? "stopped" : ""} flex items-center justify-center`}
+>>>>>>> bad-ui/master
             onClick={() => addLetter(char)}
           >
             {char}
