@@ -1,0 +1,74 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.light {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  background-color: gray;
+  transition: background-color 0.2s ease;
+}
+
+.light.red {
+  background-color: red;
+}
+
+.light.green {
+  background-color: green;
+}
+
+@keyframes move {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(100px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.letter {
+  display: inline-block;
+  padding: 1rem;
+  background-color: #3b82f6;
+  color: white;
+  border-radius: 0.5rem;
+  animation: move 3s infinite ease-in-out;
+}
+
+.stopped {
+  animation-play-state: paused;
+}
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+  75% { transform: translateX(-5px); }
+  100% { transform: translateX(0); }
+}
+
+.shake {
+  animation: shake 0.4s ease-in-out;
+}
