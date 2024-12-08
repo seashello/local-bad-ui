@@ -70,15 +70,12 @@ const Home = () => {
     return () => document.removeEventListener("mousemove", handleMouseMove);
   }, [light]);
 
-<<<<<<< HEAD
-=======
   const handleConfirm = () => {
     if (username.toLowerCase() === decodeURIComponent(targetName).toLowerCase()) {
       router.push('/birthday'); // or whatever the next page is
     }
   };
 
->>>>>>> bad-ui/master
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center">
       {/* Stoplight */}
@@ -97,20 +94,6 @@ const Home = () => {
         readOnly
       />
 
-<<<<<<< HEAD
-      {/* Moving Letters */}
-      <div className="mt-8 flex gap-2">
-        {["A", "B", "C", "D", "E",
-          "F", "G", "H", "I", "J",
-          "K", "L", "M", "N", "O",
-          "P", "Q", "R", "S", "T",
-          "U", "V", "W", "X", "Y",
-          "Z"
-        ].map((char, index) => (
-          <div
-            key={index}
-            className={`letter ${light === "red" ? "stopped" : ""}`}
-=======
       {/* Confirm Button */}
       <button
         onClick={handleConfirm}
@@ -130,7 +113,6 @@ const Home = () => {
           <div
             key={index}
             className={`letter ${light === "red" ? "stopped" : ""} flex items-center justify-center`}
->>>>>>> bad-ui/master
             onClick={() => addLetter(char)}
           >
             {char}
