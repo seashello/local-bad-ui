@@ -1,5 +1,6 @@
 'use client';
 import { useState, useEffect } from 'react';
+import { useUserContext } from '../UserContext';
 import Link from 'next/link';
 
 export default function ColorGame() {
@@ -12,6 +13,7 @@ export default function ColorGame() {
   const [message, setMessage] = useState('');
   const [timeLeft, setTimeLeft] = useState(30);
   const [isGameActive, setIsGameActive] = useState(false);
+  const { user, setUser } = useUserContext();
 
   // Generate a random shade of the given color
   const generateRandomShade = (baseColor: string) => {
@@ -162,6 +164,7 @@ export default function ColorGame() {
 
       <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
         <p className="text-sm text-gray-500">Match as many colors as you can in 30 seconds!</p>
+        <h1>{user.name}, {user.birthday}, {user.colorScore}, {user.favoriteColor}, {user.startTime}, {user.endTime}</h1>
       </footer>
     </div>
   );

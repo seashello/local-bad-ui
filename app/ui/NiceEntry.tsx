@@ -2,10 +2,14 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { useUserContext } from '../UserContext';
+
 
 export default function NiceEntry() {
   const [name, setName] = useState('');
   const router = useRouter();
+  const { user, setUser } = useUserContext();
+
 
   const isValidName = (input: string) => {
     return /^[a-zA-Z]+$/.test(input);
@@ -15,6 +19,7 @@ export default function NiceEntry() {
     if (name.trim()) {
       const encodedName = encodeURIComponent(name.trim());
       router.push(`/name?is=${encodedName}`);
+      setUser({ ...user, name: name});
     }
   };
 
