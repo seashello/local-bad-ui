@@ -35,6 +35,7 @@ const Home = () => {
   useEffect(() => {
     const toggleLight = () => {
       setLight((prev) => (prev === "red" ? "green" : "red"));
+      setLetters(shuffleArray(LETTERS));
       
       const nextInterval = getRandomInterval(1, 5);
       setTimeout(toggleLight, nextInterval);
